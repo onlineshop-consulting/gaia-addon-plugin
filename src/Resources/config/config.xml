@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/master/src/Core/System/SystemConfig/Schema/config.xsd">
+
+    <card>
+        <title>Cart &amp; Order</title>
+        <title lang="de-DE">Warenkorb &amp; Bestellung</title>
+        <input-field type="bool">
+            <name>createOrderLineItemsForProducts</name>
+            <label>Create separate order line items for linked products</label>
+            <label lang="de-DE">Bestellpositionen für verknüpfte Artikel anlegen</label>
+        </input-field>
+        <input-field type="bool">
+            <name>createOrderLineItemsForItemsWithNumber</name>
+            <label>Create separate order line items for configuration items with order numbers</label>
+            <label lang="de-DE">Bestellpositionen für Konfigurationselemente mit Artikelnummern anlegen</label>
+        </input-field>
+        <input-field type="bool">
+            <name>createOrderLineItemsForAllItems</name>
+            <label>Create separate order line items for all configuration items</label>
+            <label lang="de-DE">Bestellpositionen für alle Konfigurationselemente hinzufuegen</label>
+        </input-field>
+        <input-field type="bool">
+            <name>createOptions</name>
+            <label>Create options (similar to variation options)</label>
+            <label lang="de-DE">Auswahloptionen fuer Bestellpositionen hinzufügen (wie normale Shopware-Varianten)</label>
+        </input-field>
+        <input-field type="bool">
+            <name>overrideArticleNumber</name>
+            <label>Override Article Number</label>
+            <label lang="de-DE">Artikelnummer überschreiben</label>
+        </input-field>
+        <input-field type="bool">
+            <name>writeConfigurationListInOrderComment</name>
+            <label>Write configuration list in order comment</label>
+            <label lang="de-DE">Konfiguration in Bestellkommentar schreiben</label>
+        </input-field>
+        <input-field type="bool">
+            <name>writeConfigurationListInDescription</name>
+            <label>Write configuration list in order line item description</label>
+            <label lang="de-DE">Konfiguration in Beschreibungsfeld der Bestellposition schreiben</label>
+        </input-field>
+        <input-field type="bool">
+            <name>isConfigurationListCondensed</name>
+            <label>Use condensed version of configuration list in comment or order line item description</label>
+            <label lang="de-DE">Konfiguration in Bestellkommentar/Beschreibungsfeld in Kurzform anzeigen</label>
+        </input-field>
+    </card>
+</config>

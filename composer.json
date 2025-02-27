@@ -1,0 +1,44 @@
+{
+  "name": "onco/sfc-addon",
+  "description": "Gaia SFC AddOn",
+  "type": "shopware-platform-plugin",
+  "license": "proprietary",
+  "version": "v3.1.0",
+  "authors": [
+    {
+      "name": "onlineshop.consulting",
+      "role": "Manufacturer",
+      "homepage": "https://onlineshop.consulting"
+    }
+  ],
+  "require": {
+    "shopware/core": "6.6.*",
+    "shopware/storefront": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "OncoSfcAddon\\": "src/"
+    }
+  },
+  "extra": {
+    "shopware-plugin-class": "OncoSfcAddon\\OncoSfcAddon",
+    "plugin-icon": "plugin.png",
+    "copyright": "by onlineshop.consulting",
+    "label": {
+      "de-DE": "Gaia SFC AddOn",
+      "en-GB": "Gaia SFC AddOn"
+    },
+    "description": {
+      "en-GB": "",
+      "de-DE": ""
+    },
+    "manufacturerLink": {
+      "en-GB": "https://onlineshop.consulting",
+      "de-DE": "https://onlineshop.consulting"
+    },
+    "supportLink": {
+      "de-DE": "https://onlineshop.consulting",
+      "en-GB": "https://onlineshop.consulting"
+    }
+  }
+}
