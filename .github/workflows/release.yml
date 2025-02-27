@@ -1,0 +1,34 @@
+name: Build Release ZIP
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build-zip:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Prepare ZIP file
+      run: |
+        mkdir -p build/OncoSfcAddon
+
+        rsync -av --progress ./ build/OncoSfcAddon \
+          --exclude build \
+          --exclude .git \
+          --exclude .github \
+        cd build
+        zip -r OncoSfcAddon.zip OncoSfcAddon
+
+    - name: Upload release asset
+      uses: actions/upload-release-asset@v1
+      with:
+        upload_url: ${{ github.event.release.upload_url }}
+        asset_path: build/OncoSfcAddon.zip
+        asset_name: OncoSfcAddon.zip
+        asset_content_type: application/zip
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
