@@ -5,6 +5,7 @@ namespace OncoSfcAddon\Subscribers;
 use OncoSfcAddon\Services\ConfigService;
 use Shopware\Core\Checkout\Cart\Event\CheckoutOrderPlacedEvent;
 use Shopware\Core\Checkout\Order\Aggregate\OrderLineItem\OrderLineItemEntity;
+use Shopware\Core\Content\Product\ProductEntity;
 use Shopware\Core\Framework\Context;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityRepository;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
@@ -121,10 +122,8 @@ class OrderSubscriber implements EventSubscriberInterface
                     $positionNumber = 0;
                     foreach ($data as $configurationItemData) {
                         if ($configService->isCreateOrderLineItemsForAllItems() || $configurationItemData['item_number']) {
-                            $orderRepository->update([[
-                                'id' => $order->getId(),
-                                'lineItems' => [
-                                    [
+
+                            $lineItem = [
                                         'identifier' => 'gaia-' . uniqid(),
                                         'parentId' => $item->getId(),
                                         'label' => $configurationItemData['item'] .
@@ -163,7 +162,15 @@ class OrderSubscriber implements EventSubscriberInterface
                                             'parameters' => [],
                                         ],
                                         'quantity' => $item->getQuantity() * 1,//TODO configuration qty
-                                    ],
+                            ];
+
+                            $this->applyProductDataToNewLineItem($lineItem, $configurationDetails, $configurationItemData['item_id'], $event->getContext());
+
+
+                            $orderRepository->update([[
+                                'id' => $order->getId(),
+                                'lineItems' => [
+                                    $lineItem,
                                 ],
                             ]], $event->getContext());
                         }
@@ -178,6 +185,30 @@ class OrderSubscriber implements EventSubscriberInterface
                 'id' => $order->getId(),
                 'customerComment' => trim($order->getCustomerComment() . "\n" . $additionalComment),
             ]], $event->getContext());
+        }
+    }
+
+    public function applyProductDataToNewLineItem(array &$lineItem, array $configurationDetails, $itemId, Context $context)
+    {
+        if (empty($configurationDetails['productRelatedItems'])) {
+            return;
+        }
+        /** @var EntityRepository $productRepository */
+        $productRepository = $this->container->get('product.repository');
+
+        foreach ($configurationDetails['productRelatedItems'] as $productRelatedItem) {
+            if ((string)$productRelatedItem['id'] === (string)$itemId) {
+                /** @var ProductEntity $product */
+                $product = $productRepository->search((new Criteria([$productRelatedItem['productId']])), $context)->first();
+                if ($product) {
+                    $lineItem['productId'] = $product->getId();
+                    $lineItem['referencedId'] = $product->getId();
+                    $lineItem['label'] = $product->getName();
+                    $lineItem['payload']['productNumber'] = $product->getProductNumber();
+                    $lineItem['type'] = 'product';
+                    return;
+                }
+            }
         }
     }
 
