@@ -19,7 +19,7 @@ jobs:
         rsync -av --progress ./ build/OncoSfcAddon \
           --exclude build \
           --exclude .git \
-          --exclude .github \
+          --exclude .github
         cd build
         zip -r OncoSfcAddon.zip OncoSfcAddon
 
