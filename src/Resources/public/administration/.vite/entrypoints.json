@@ -1,0 +1,23 @@
+{
+  "base": "/bundles/oncosfcaddon/administration/",
+  "entryPoints": {
+    "onco-sfc-addon": {
+      "css": [],
+      "dynamic": [],
+      "js": [
+        "/bundles/oncosfcaddon/administration/assets/onco-sfc-addon-DFv8Nri-.js"
+      ],
+      "legacy": false,
+      "preload": []
+    }
+  },
+  "legacy": false,
+  "metadatas": {},
+  "version": [
+    "7.1.0",
+    7,
+    1,
+    0
+  ],
+  "viteServer": null
+}

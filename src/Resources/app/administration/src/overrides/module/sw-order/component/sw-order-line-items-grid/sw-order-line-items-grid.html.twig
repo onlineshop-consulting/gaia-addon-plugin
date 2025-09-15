@@ -1,7 +1,7 @@
 {% block sw_order_line_items_grid_grid_columns_label_content %}
     {% parent %}
 
-    <template>
+    <div>
         <sw-product-variant-info v-if="item.payload && item.payload.options && item.productId && !isProductItem(item)" :variations="item.payload.options"></sw-product-variant-info>
         <div v-if="item.payload.gaiaConfigurationDetails">
             <div>
@@ -9,5 +9,5 @@
             </div>
             <div v-html="item.payload.gaiaConfigurationDetails.itemList"></div>
         </div>
-    </template>
+    </div>
 {% endblock %}
