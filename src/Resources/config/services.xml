@@ -9,15 +9,17 @@
             <argument type="service" id="Shopware\Core\Checkout\Cart\Price\QuantityPriceCalculator"/>
             <tag name="shopware.cart.processor" priority="5000"/>
         </service>
-        <service id="OncoSfcAddon\Services\ConfigService" public="true">
+        <service id="OncoSfcAddon\Services\ConfigService">
             <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
         </service>
 
         <service id="OncoSfcAddon\Subscribers\OrderSubscriber">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-            <tag name="kernel.event_subscriber" />
+            <argument type="service" id="OncoSfcAddon\Services\ConfigService"/>
+            <argument type="service" id="order.repository"/>
+            <argument type="service" id="product.repository"/>
+            <argument type="service" id="order_line_item.repository"/>
+            <argument type="service" id="logger"/>
+            <tag name="kernel.event_subscriber"/>
         </service>
     </services>
 </container>

@@ -26,11 +26,6 @@
             <label lang="de-DE">Auswahloptionen fuer Bestellpositionen hinzufügen (wie normale Shopware-Varianten)</label>
         </input-field>
         <input-field type="bool">
-            <name>overrideArticleNumber</name>
-            <label>Override Article Number</label>
-            <label lang="de-DE">Artikelnummer überschreiben</label>
-        </input-field>
-        <input-field type="bool">
             <name>writeConfigurationListInOrderComment</name>
             <label>Write configuration list in order comment</label>
             <label lang="de-DE">Konfiguration in Bestellkommentar schreiben</label>
